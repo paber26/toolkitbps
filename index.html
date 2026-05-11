@@ -1,37 +1,79 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tools yang Dibuat oleh Bernaldo Napitupulu</title>
+    <title>Tools yang Dibuat Mempermudah Pekerjaan BPS</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#081F2D",
+              mist: "#EFF7F6",
+              mint: "#6EE7B7",
+              coral: "#FF7A59",
+              gold: "#F6C453",
+              sky: "#6BCBFF",
+            },
+            boxShadow: {
+              glow: "0 25px 80px rgba(8, 31, 45, 0.18)",
+            },
+            animation: {
+              float: "float 15s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0px) translateX(0px)" },
+                "50%": { transform: "translateY(-20px) translateX(10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
-        position: relative;
-        overflow-x: hidden;
+        font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(59, 89, 152, 0.15),
+            transparent 35%
+          ),
+          radial-gradient(
+            circle at top right,
+            rgba(123, 44, 191, 0.12),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at bottom,
+            rgba(233, 30, 99, 0.08),
+            transparent 40%
+          ),
+          linear-gradient(180deg, #f5f8fb 0%, #faf9fc 50%, #ffffff 100%);
+        color: #081f2d;
       }
 
-      .gradient-bg {
-        background: linear-gradient(
-          135deg,
-          #3b5998 0%,
-          #7b2cbf 50%,
-          #e91e63 100%
-        );
-        position: relative;
-        overflow: hidden;
-      }
-
-      /* Decorative dots pattern */
       .dot-pattern {
         position: absolute;
         width: 100%;
         height: 100%;
-        overflow: hidden;
         pointer-events: none;
       }
 
@@ -68,15 +110,20 @@
         100% {
           transform: translateY(0px) translateX(0px);
         }
-        25% {
-          transform: translateY(-20px) translateX(10px);
-        }
         50% {
-          transform: translateY(-40px) translateX(-10px);
-        }
-        75% {
           transform: translateY(-20px) translateX(10px);
         }
+      }
+
+      .grid-pattern {
+        background-image:
+          linear-gradient(rgba(8, 31, 45, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(8, 31, 45, 0.06) 1px, transparent 1px);
+        background-size: 28px 28px;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.6s ease-out;
       }
 
       @keyframes fadeIn {
@@ -89,176 +136,102 @@
           transform: translateY(0);
         }
       }
-
-      .fade-in {
-        animation: fadeIn 0.6s ease-out;
-      }
-
-      .tool-card {
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-      }
-
-      .tool-card:hover {
-        transform: translateY(-10px);
-      }
-
-      .icon-box {
-        width: 100px;
-        height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 20px;
-        margin: 0 auto 20px;
-        font-size: 50px;
-      }
-
-      .underline-decoration {
-        width: 60px;
-        height: 4px;
-        margin: 15px auto;
-        border-radius: 2px;
-      }
-
-      .intro-box {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 20px;
-        padding: 30px;
-      }
-
-      .intro-icon {
-        width: 60px;
-        height: 60px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 30px;
-        margin-bottom: 15px;
-      }
-
-      /* Decorative circles */
-      .circle-decoration {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.05;
-        border: 2px solid white;
-      }
-
-      .circle-1 {
-        width: 200px;
-        height: 200px;
-        top: 10%;
-        left: 5%;
-      }
-
-      .circle-2 {
-        width: 150px;
-        height: 150px;
-        bottom: 15%;
-        right: 10%;
-      }
     </style>
   </head>
-  <body>
-    <div class="gradient-bg min-h-screen relative">
-      <div class="dot-pattern"></div>
-      <div class="circle-decoration circle-1"></div>
-      <div class="circle-decoration circle-2"></div>
-
-      <div class="container mx-auto px-4 py-16 relative z-10">
-        <header class="text-center mb-8 fade-in">
-          <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-2">
-            Tools yang Dibuat Mempermudah Pekerjaan BPS
-          </h1>
-          <p class="text-xl text-blue-100">
-            Solusi Inovatif oleh Bernaldo Napitupulu - Pranata Komputer Ahli
-            Pertama di BPS Minahasa Selatan
-          </p>
-          <div class="w-24 h-1 bg-white mx-auto mt-4 rounded-full"></div>
-        </header>
-
-        <div class="intro-box max-w-3xl mx-auto mb-16 fade-in">
-          <div class="flex items-start gap-4">
-            <div class="intro-icon flex-shrink-0">
-              <i class="fas fa-star text-white"></i>
-            </div>
-            <p class="text-white text-lg leading-relaxed">
-              Berikut adalah tools yang telah saya kembangkan untuk mempermudah
-              dan meningkatkan efisiensi pekerjaan di Badan Pusat Statistik
-              (BPS) Minahasa Selatan. Setiap aplikasi dirancang untuk
-              memaksimalkan produktivitas dan akuntabilitas kerja:
-            </p>
-          </div>
-        </div>
-
+  <body class="text-ink">
+    <div class="relative overflow-hidden">
+      <div class="pointer-events-none absolute inset-0 -z-10">
         <div
-          class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16"
-        >
-          <!-- Card 1 -->
-          <div class="tool-card bg-white rounded-2xl p-8 shadow-2xl fade-in">
-            <div class="icon-box bg-blue-100">
-              <i class="fas fa-users text-blue-600"></i>
+          class="absolute left-[-4rem] top-16 h-48 w-48 rounded-full bg-mint/40 blur-3xl animate-drift"
+        ></div>
+        <div
+          class="absolute right-0 top-10 h-72 w-72 rounded-full bg-sky/30 blur-3xl animate-float"
+        ></div>
+        <div
+          class="absolute bottom-24 left-1/3 h-64 w-64 rounded-full bg-coral/20 blur-3xl animate-drift"
+        ></div>
+        <div class="absolute inset-0 grid-pattern opacity-40"></div>
+      </div>
+
+      <main class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <section class="text-center fade-in">
+          <div
+            class="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/80 px-4 py-2 text-sm font-semibold text-ink/70 shadow-sm backdrop-blur"
+          >
+            <span class="h-2.5 w-2.5 rounded-full bg-mint"></span>
+            Tools yang dibuat untuk mempermudah pekerjaan BPS Minahasa Selatan
+          </div>
+          <h1
+            class="mt-8 max-w-4xl mx-auto text-5xl font-extrabold tracking-tight sm:text-6xl"
+          >
+            Aplikasi internal BPS dengan desain modern, data cepat, dan kontrol
+            kerja lebih mudah.
+          </h1>
+          <p class="mt-8 max-w-3xl mx-auto text-lg leading-8 text-ink/70">
+            Bernaldo Napitupulu, Pranata Komputer Ahli Pertama di BPS Minahasa
+            Selatan, menghadirkan solusi digital untuk memantau pegawai,
+            menyajikan informasi satu link, dan memantau wilayah kerja statistik
+            dengan lebih efektif.
+          </p>
+        </section>
+
+        <section class="mt-16 grid gap-8 lg:grid-cols-3">
+          <div
+            class="tool-card rounded-[2rem] border border-white/50 bg-gradient-to-br from-blue-50 to-white p-8 shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in"
+          >
+            <div
+              class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-6"
+            >
+              <i class="fas fa-users text-2xl text-blue-600"></i>
             </div>
-            <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">
+            <h3 class="text-2xl font-bold text-ink mb-3">
               Aplikasi Pantau Pegawai
-            </h2>
-            <div class="underline-decoration bg-blue-600 mx-auto"></div>
-            <p class="text-gray-700 leading-relaxed text-center">
-              Aplikasi ini dirancang untuk memantau kehadiran, aktivitas, dan
-              performa pegawai di BPS Minahasa Selatan. Dengan fitur pelaporan
-              real-time dan dashboard interaktif, aplikasi ini membantu
-              manajemen dalam mengelola sumber daya manusia secara efisien,
-              memastikan produktivitas dan akuntabilitas pegawai.
+            </h3>
+            <p class="text-ink/70 leading-relaxed">
+              Memantau kehadiran, aktivitas, dan performa pegawai dengan
+              dashboard real-time untuk keputusan yang cepat.
             </p>
           </div>
 
-          <!-- Card 2 -->
-          <div class="tool-card bg-white rounded-2xl p-8 shadow-2xl fade-in">
-            <div class="icon-box bg-green-100">
-              <i class="fas fa-chart-line text-green-600"></i>
+          <div
+            class="tool-card rounded-[2rem] border border-white/50 bg-gradient-to-br from-green-50 to-white p-8 shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in"
+          >
+            <div
+              class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-2xl mb-6"
+            >
+              <i class="fas fa-chart-line text-2xl text-green-600"></i>
             </div>
-            <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">
+            <h3 class="text-2xl font-bold text-ink mb-3">
               Aplikasi Dashboard Informasi Satu Link
-            </h2>
-            <div class="underline-decoration bg-green-600 mx-auto"></div>
-            <p class="text-gray-700 leading-relaxed text-center">
-              Dashboard ini menyediakan akses terintegrasi ke berbagai informasi
-              penting BPS dalam satu platform. Pengguna dapat melihat data
-              statistik, laporan, dan indikator kinerja dari berbagai sumber
-              dalam satu link, memudahkan pengambilan keputusan dan koordinasi
-              antar unit kerja.
+            </h3>
+            <p class="text-ink/70 leading-relaxed">
+              Akses terintegrasi untuk semua informasi penting BPS, memudahkan
+              koordinasi dan pelaporan unit kerja.
             </p>
           </div>
 
-          <!-- Card 3 -->
-          <div class="tool-card bg-white rounded-2xl p-8 shadow-2xl fade-in">
-            <div class="icon-box bg-red-100">
-              <i class="fas fa-map-marked-alt text-red-600"></i>
+          <div
+            class="tool-card rounded-[2rem] border border-white/50 bg-gradient-to-br from-red-50 to-white p-8 shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in"
+          >
+            <div
+              class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-2xl mb-6"
+            >
+              <i class="fas fa-map-marked-alt text-2xl text-red-600"></i>
             </div>
-            <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">
+            <h3 class="text-2xl font-bold text-ink mb-3">
               Aplikasi Pantau Wilkerstat
-            </h2>
-            <div class="underline-decoration bg-red-600 mx-auto"></div>
-            <p class="text-gray-700 leading-relaxed text-center">
-              Aplikasi ini digunakan untuk memantau dan mengelola wilayah kerja
-              statistik (Wilkerstat) di bawah BPS Minahasa Selatan. Dengan fitur
-              pemetaan, pelaporan, dan analisis data, aplikasi ini mendukung
-              pengumpulan data lapangan yang akurat dan tepat waktu, serta
-              memfasilitasi pengawasan terhadap kegiatan survei dan sensus.
+            </h3>
+            <p class="text-ink/70 leading-relaxed">
+              Monitoring wilayah kerja statistik dengan pelaporan digital dan
+              analisis data lapangan yang lebih akurat.
             </p>
           </div>
-        </div>
+        </section>
 
-        <footer class="text-center text-white text-sm fade-in py-8">
+        <footer class="mt-20 text-center text-sm text-ink/60 pb-10 fade-in">
           <p>&copy; 2026 Bernaldo Napitupulu - BPS Minahasa Selatan</p>
         </footer>
-      </div>
+      </main>
     </div>
   </body>
 </html>
