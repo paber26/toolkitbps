@@ -1,9 +1,25 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tools yang Dibuat Mempermudah Pekerjaan BPS</title>
+    <title>Toolkit BPS — Perangkat Kerja Digital Gratis untuk BPS</title>
+
+    <meta
+      name="description"
+      content="Toolkit BPS menyediakan perangkat kerja digital gratis untuk Badan Pusat Statistik: monitoring pencacahan, sistem laporan, dashboard wilayah kerja, dan rekap pegawai. Non-profit, dibuat oleh pegawai BPS untuk BPS."
+    />
+    <link rel="canonical" href="https://toolkitbps.my.id/" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:title" content="Toolkit BPS — Perangkat Kerja Digital Gratis untuk BPS" />
+    <meta
+      property="og:description"
+      content="Perangkat kerja digital gratis untuk BPS: monitoring pencacahan, sistem laporan, dashboard wilayah kerja, dan rekap pegawai. Non-profit, tanpa biaya."
+    />
+    <meta property="og:url" content="https://toolkitbps.my.id/" />
+    <meta property="og:type" content="website" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -17,32 +33,21 @@
               gold: "#F6C453",
               sky: "#6BCBFF",
             },
-            boxShadow: {
-              glow: "0 25px 80px rgba(8, 31, 45, 0.18)",
-            },
-            animation: {
-              float: "float 15s ease-in-out infinite",
-            },
-            keyframes: {
-              float: {
-                "0%, 100%": { transform: "translateY(0px) translateX(0px)" },
-                "50%": { transform: "translateY(-20px) translateX(10px)" },
-              },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
             },
           },
         },
       };
     </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+
     <style>
       html {
         scroll-behavior: smooth;
@@ -50,188 +55,683 @@
 
       body {
         font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-        background:
-          radial-gradient(
-            circle at top left,
-            rgba(59, 89, 152, 0.15),
-            transparent 35%
-          ),
-          radial-gradient(
-            circle at top right,
-            rgba(123, 44, 191, 0.12),
-            transparent 30%
-          ),
-          radial-gradient(
-            circle at bottom,
-            rgba(233, 30, 99, 0.08),
-            transparent 40%
-          ),
-          linear-gradient(180deg, #f5f8fb 0%, #faf9fc 50%, #ffffff 100%);
         color: #081f2d;
+        background:
+          radial-gradient(circle at top left, rgba(110, 231, 183, 0.22), transparent 30%),
+          radial-gradient(circle at top right, rgba(107, 203, 255, 0.2), transparent 26%),
+          radial-gradient(circle at bottom, rgba(255, 122, 89, 0.08), transparent 38%),
+          linear-gradient(180deg, #f9fffd 0%, #eff7f6 48%, #ffffff 100%);
       }
 
-      .dot-pattern {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 650ms ease, transform 650ms ease;
       }
-
-      .dot-pattern::before,
-      .dot-pattern::after {
-        content: "";
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.1;
-      }
-
-      .dot-pattern::before {
-        width: 300px;
-        height: 300px;
-        background: radial-gradient(circle, white 1px, transparent 1px);
-        background-size: 30px 30px;
-        top: -50px;
-        left: -50px;
-        animation: float 15s ease-in-out infinite;
-      }
-
-      .dot-pattern::after {
-        width: 300px;
-        height: 300px;
-        background: radial-gradient(circle, white 1px, transparent 1px);
-        background-size: 30px 30px;
-        bottom: -50px;
-        right: -50px;
-        animation: float 18s ease-in-out infinite reverse;
-      }
-
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0px) translateX(0px);
-        }
-        50% {
-          transform: translateY(-20px) translateX(10px);
-        }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .grid-pattern {
         background-image:
-          linear-gradient(rgba(8, 31, 45, 0.06) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(8, 31, 45, 0.06) 1px, transparent 1px);
+          linear-gradient(rgba(8, 31, 45, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(8, 31, 45, 0.055) 1px, transparent 1px);
         background-size: 28px 28px;
       }
 
-      .fade-in {
-        animation: fadeIn 0.6s ease-out;
+      .card-hover {
+        transition: transform 300ms ease, box-shadow 300ms ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 28px 60px rgba(8, 31, 45, 0.14);
       }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      details > summary {
+        list-style: none;
+        cursor: pointer;
+      }
+      details > summary::-webkit-details-marker {
+        display: none;
+      }
+      details[open] .faq-icon {
+        transform: rotate(45deg);
+      }
+      .faq-icon {
+        transition: transform 220ms ease;
       }
     </style>
   </head>
-  <body class="text-ink">
+
+  <body class="antialiased">
     <div class="relative overflow-hidden">
+      <!-- Ornamen latar -->
       <div class="pointer-events-none absolute inset-0 -z-10">
-        <div
-          class="absolute left-[-4rem] top-16 h-48 w-48 rounded-full bg-mint/40 blur-3xl animate-drift"
-        ></div>
-        <div
-          class="absolute right-0 top-10 h-72 w-72 rounded-full bg-sky/30 blur-3xl animate-float"
-        ></div>
-        <div
-          class="absolute bottom-24 left-1/3 h-64 w-64 rounded-full bg-coral/20 blur-3xl animate-drift"
-        ></div>
+        <div class="absolute left-[-4rem] top-20 h-56 w-56 rounded-full bg-mint/40 blur-3xl"></div>
+        <div class="absolute right-0 top-10 h-72 w-72 rounded-full bg-sky/30 blur-3xl"></div>
+        <div class="absolute bottom-32 left-1/3 h-64 w-64 rounded-full bg-coral/15 blur-3xl"></div>
         <div class="absolute inset-0 grid-pattern opacity-40"></div>
       </div>
 
-      <main class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <section class="text-center fade-in">
+      <!-- HEADER -->
+      <header class="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-8">
+        <a href="/" class="flex items-center gap-3">
+          <span
+            class="flex h-10 w-10 items-center justify-center rounded-xl bg-ink text-sm font-extrabold text-mint shadow-sm"
+            >TB</span
+          >
+          <span class="text-lg font-extrabold tracking-tight">Toolkit BPS</span>
+        </a>
+        <nav class="hidden items-center gap-7 text-sm font-semibold text-ink/70 md:flex">
+          <a href="#aplikasi" class="transition hover:text-ink">Aplikasi</a>
+          <a href="#monitoring" class="transition hover:text-ink">Monitoring SE</a>
+          <a href="#prinsip" class="transition hover:text-ink">Kenapa Gratis</a>
+          <a href="#faq" class="transition hover:text-ink">FAQ</a>
+          <a
+            href="#kontak"
+            class="rounded-full bg-ink px-5 py-2.5 text-white transition hover:bg-ink/85"
+            >Hubungi Kami</a
+          >
+        </nav>
+        <a
+          href="#kontak"
+          class="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white md:hidden"
+          >Kontak</a
+        >
+      </header>
+
+      <main class="mx-auto max-w-7xl px-6 pb-20 lg:px-8">
+        <!-- HERO -->
+        <section class="reveal pt-8 text-center sm:pt-14">
           <div
-            class="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/80 px-4 py-2 text-sm font-semibold text-ink/70 shadow-sm backdrop-blur"
+            class="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/80 px-4 py-2 text-xs font-semibold text-ink/70 shadow-sm backdrop-blur sm:text-sm"
           >
             <span class="h-2.5 w-2.5 rounded-full bg-mint"></span>
-            Tools yang dibuat untuk mempermudah pekerjaan BPS Minahasa Selatan
+            Non-profit · Gratis untuk satuan kerja BPS · Tanpa biaya lisensi
           </div>
+
           <h1
-            class="mt-8 max-w-4xl mx-auto text-5xl font-extrabold tracking-tight sm:text-6xl"
+            class="mx-auto mt-8 max-w-4xl text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl"
           >
-            Aplikasi internal BPS dengan desain modern, data cepat, dan kontrol
-            kerja lebih mudah.
+            Perangkat kerja digital untuk BPS —
+            <span class="text-ink/60">dibuat oleh pegawai BPS, untuk BPS.</span>
           </h1>
-          <p class="mt-8 max-w-3xl mx-auto text-lg leading-8 text-ink/70">
-            Bernaldo Napitupulu, Pranata Komputer Ahli Pertama di BPS Minahasa
-            Selatan, menghadirkan solusi digital untuk memantau pegawai,
-            menyajikan informasi satu link, dan memantau wilayah kerja statistik
-            dengan lebih efektif.
+
+          <p class="mx-auto mt-7 max-w-3xl text-base leading-8 text-ink/70 sm:text-lg">
+            Toolkit BPS menyediakan aplikasi siap pakai untuk pekerjaan sehari-hari satuan kerja
+            BPS: memantau jalannya pencacahan survei, menyusun laporan kegiatan, merekap wilayah
+            kerja statistik, dan memantau pegawai. Semuanya
+            <strong class="font-semibold text-ink">gratis</strong> dan tanpa biaya langganan.
+          </p>
+
+          <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="#aplikasi"
+              class="w-full rounded-full bg-ink px-7 py-3.5 text-center text-sm font-bold text-white shadow-lg transition hover:bg-ink/85 sm:w-auto"
+              >Lihat Aplikasi</a
+            >
+            <a
+              href="#kontak"
+              class="w-full rounded-full border border-ink/15 bg-white/80 px-7 py-3.5 text-center text-sm font-bold text-ink backdrop-blur transition hover:border-ink/30 sm:w-auto"
+              >Ajukan untuk Satuan Kerja Anda</a
+            >
+          </div>
+
+          <p class="mt-6 text-xs text-ink/50">
+            Tidak dipungut biaya · Tidak ada iklan · Tidak ada penjualan data
           </p>
         </section>
 
-        <section class="mt-16 grid gap-8 lg:grid-cols-3">
-          <div
-            class="tool-card rounded-[2rem] border border-white/50 bg-gradient-to-br from-blue-50 to-white p-8 shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in"
-          >
-            <div
-              class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-6"
-            >
-              <i class="fas fa-users text-2xl text-blue-600"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-ink mb-3">
-              Aplikasi Pantau Pegawai
-            </h3>
-            <p class="text-ink/70 leading-relaxed">
-              Memantau kehadiran, aktivitas, dan performa pegawai dengan
-              dashboard real-time untuk keputusan yang cepat.
+        <!-- STATISTIK NYATA -->
+        <section class="reveal mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-2xl border border-ink/8 bg-white/70 p-5 backdrop-blur">
+            <div class="text-3xl font-extrabold text-ink">6</div>
+            <div class="mt-1 text-sm font-semibold text-ink/80">Satuan kerja memakai</div>
+            <p class="mt-1 text-xs text-ink/55">
+              Satu BPS provinsi dan lima BPS kabupaten/kota.
             </p>
           </div>
-
-          <div
-            class="tool-card rounded-[2rem] border border-white/50 bg-gradient-to-br from-green-50 to-white p-8 shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in"
-          >
-            <div
-              class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-2xl mb-6"
-            >
-              <i class="fas fa-chart-line text-2xl text-green-600"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-ink mb-3">
-              Aplikasi Dashboard Informasi Satu Link
-            </h3>
-            <p class="text-ink/70 leading-relaxed">
-              Akses terintegrasi untuk semua informasi penting BPS, memudahkan
-              koordinasi dan pelaporan unit kerja.
+          <div class="rounded-2xl border border-ink/8 bg-white/70 p-5 backdrop-blur">
+            <div class="text-3xl font-extrabold text-ink">77.000+</div>
+            <div class="mt-1 text-sm font-semibold text-ink/80">Akses dashboard</div>
+            <p class="mt-1 text-xs text-ink/55">
+              Tercatat pada dashboard Monitoring SE yang sedang berjalan.
             </p>
           </div>
-
-          <div
-            class="tool-card rounded-[2rem] border border-white/50 bg-gradient-to-br from-red-50 to-white p-8 shadow-lg hover:-translate-y-2 transition-transform duration-300 fade-in"
-          >
-            <div
-              class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-2xl mb-6"
-            >
-              <i class="fas fa-map-marked-alt text-2xl text-red-600"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-ink mb-3">
-              Aplikasi Pantau Wilkerstat
-            </h3>
-            <p class="text-ink/70 leading-relaxed">
-              Monitoring wilayah kerja statistik dengan pelaporan digital dan
-              analisis data lapangan yang lebih akurat.
+          <div class="rounded-2xl border border-ink/8 bg-white/70 p-5 backdrop-blur">
+            <div class="text-3xl font-extrabold text-ink">100%</div>
+            <div class="mt-1 text-sm font-semibold text-ink/80">Gratis dipakai</div>
+            <p class="mt-1 text-xs text-ink/55">
+              Tanpa langganan, tanpa lisensi, tanpa biaya tersembunyi.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-ink/8 bg-white/70 p-5 backdrop-blur">
+            <div class="text-3xl font-extrabold text-ink">4</div>
+            <div class="mt-1 text-sm font-semibold text-ink/80">Jenis aplikasi</div>
+            <p class="mt-1 text-xs text-ink/55">
+              Dipakai untuk pekerjaan nyata, bukan sekadar demo.
             </p>
           </div>
         </section>
 
-        <footer class="mt-20 text-center text-sm text-ink/60 pb-10 fade-in">
-          <p>&copy; 2026 Bernaldo Napitupulu - BPS Minahasa Selatan</p>
+        <!-- APLIKASI -->
+        <section id="aplikasi" class="reveal mt-24 scroll-mt-24">
+          <div class="mx-auto max-w-3xl text-center">
+            <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Aplikasi yang tersedia</h2>
+            <p class="mt-4 text-base leading-7 text-ink/65">
+              Empat jenis aplikasi yang sudah dipakai untuk pekerjaan sehari-hari. Klik untuk
+              langsung membuka.
+            </p>
+          </div>
+
+          <div class="mt-12 grid gap-6 lg:grid-cols-2">
+            <!-- Monitoring SE -->
+            <div
+              class="card-hover flex flex-col rounded-3xl border border-white/60 bg-gradient-to-br from-violet-50 to-white p-7 shadow-lg lg:col-span-2"
+            >
+              <div class="flex flex-wrap items-start justify-between gap-3">
+                <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-100 text-2xl">
+                  📊
+                </span>
+                <span
+                  class="rounded-full bg-violet-600 px-3 py-1 text-[11px] font-bold text-white"
+                  >DIPAKAI 6 SATUAN KERJA</span
+                >
+              </div>
+              <h3 class="mt-5 text-2xl font-bold">Monitoring Pencacahan SE2026</h3>
+              <p class="mt-3 max-w-3xl text-sm leading-7 text-ink/65">
+                Dashboard untuk memantau jalannya pencacahan Sensus Ekonomi 2026 secara
+                <em>real-time</em>: progres assignment per kecamatan dan SLS, kinerja petugas,
+                temuan anomali lapangan, hingga rekapitulasi honor. Kendala di lapangan bisa
+                diketahui lebih cepat sehingga tidak menumpuk di akhir periode.
+              </p>
+              <p class="mt-3 max-w-3xl text-sm leading-7 text-ink/65">
+                Setiap satuan kerja memakai dashboardnya sendiri dengan data yang terpisah, dan
+                dapat memperbarui datanya melalui unggah berkas Excel/CSV.
+              </p>
+
+              <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <a
+                  href="https://monitoring-se.toolkitbps.my.id"
+                  target="_blank"
+                  rel="noopener"
+                  class="rounded-xl border border-violet-200 bg-white px-4 py-3 text-sm font-bold text-violet-700 transition hover:border-violet-400"
+                  >Kab. Minahasa Selatan →</a
+                >
+                <a
+                  href="https://mse-sulut.toolkitbps.my.id"
+                  target="_blank"
+                  rel="noopener"
+                  class="rounded-xl border border-violet-200 bg-white px-4 py-3 text-sm font-bold text-violet-700 transition hover:border-violet-400"
+                  >Prov. Sulawesi Utara →</a
+                >
+                <a
+                  href="https://mse-minahasa.toolkitbps.my.id"
+                  target="_blank"
+                  rel="noopener"
+                  class="rounded-xl border border-violet-200 bg-white px-4 py-3 text-sm font-bold text-violet-700 transition hover:border-violet-400"
+                  >Kab. Minahasa →</a
+                >
+                <a
+                  href="https://mse-minut.toolkitbps.my.id"
+                  target="_blank"
+                  rel="noopener"
+                  class="rounded-xl border border-violet-200 bg-white px-4 py-3 text-sm font-bold text-violet-700 transition hover:border-violet-400"
+                  >Kab. Minahasa Utara →</a
+                >
+                <a
+                  href="https://mse-tomohon.toolkitbps.my.id"
+                  target="_blank"
+                  rel="noopener"
+                  class="rounded-xl border border-violet-200 bg-white px-4 py-3 text-sm font-bold text-violet-700 transition hover:border-violet-400"
+                  >Kota Tomohon →</a
+                >
+                <a
+                  href="https://mse-manado.toolkitbps.my.id"
+                  target="_blank"
+                  rel="noopener"
+                  class="rounded-xl border border-violet-200 bg-white px-4 py-3 text-sm font-bold text-violet-700 transition hover:border-violet-400"
+                  >Kota Manado →</a
+                >
+              </div>
+            </div>
+
+            <!-- Sistem Laporan -->
+            <a
+              href="https://laporan.toolkitbps.my.id"
+              target="_blank"
+              rel="noopener"
+              class="card-hover group flex flex-col rounded-3xl border border-white/60 bg-gradient-to-br from-blue-50 to-white p-7 shadow-lg"
+            >
+              <div class="flex items-start justify-between">
+                <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-2xl">
+                  📝
+                </span>
+                <span class="rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-bold text-emerald-700"
+                  >SIAP PAKAI</span
+                >
+              </div>
+              <h3 class="mt-5 text-xl font-bold">Sistem Laporan Kegiatan</h3>
+              <p class="mt-2 flex-1 text-sm leading-7 text-ink/65">
+                Menyusun laporan kegiatan beserta dokumentasi foto, KAK, dan rincian anggaran dalam
+                satu alur. Hasilnya bisa langsung diekspor ke PDF maupun Word tanpa menyusun ulang
+                dari nol.
+              </p>
+              <span class="mt-5 text-sm font-bold text-blue-700 transition group-hover:translate-x-1"
+                >Buka laporan.toolkitbps.my.id →</span
+              >
+            </a>
+
+            <!-- Wilkerstat -->
+            <a
+              href="https://wilker.toolkitbps.my.id"
+              target="_blank"
+              rel="noopener"
+              class="card-hover group flex flex-col rounded-3xl border border-white/60 bg-gradient-to-br from-teal-50 to-white p-7 shadow-lg"
+            >
+              <div class="flex items-start justify-between">
+                <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-100 text-2xl">
+                  🗺️
+                </span>
+                <span class="rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-bold text-emerald-700"
+                  >SIAP PAKAI</span
+                >
+              </div>
+              <h3 class="mt-5 text-xl font-bold">Dashboard Wilayah Kerja</h3>
+              <p class="mt-2 flex-1 text-sm leading-7 text-ink/65">
+                Menyajikan rekapan wilayah kerja statistik per kecamatan, desa, dan SLS dalam satu
+                dashboard. Memudahkan pengecekan cakupan wilayah sebelum dan sesudah kegiatan
+                lapangan.
+              </p>
+              <span class="mt-5 text-sm font-bold text-teal-700 transition group-hover:translate-x-1"
+                >Buka wilker.toolkitbps.my.id →</span
+              >
+            </a>
+
+            <!-- Pantau Pegawai -->
+            <a
+              href="https://pawai.toolkitbps.my.id"
+              target="_blank"
+              rel="noopener"
+              class="card-hover group flex flex-col rounded-3xl border border-white/60 bg-gradient-to-br from-amber-50 to-white p-7 shadow-lg lg:col-span-2"
+            >
+              <div class="flex items-start justify-between">
+                <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-2xl">
+                  👥
+                </span>
+                <span class="rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-bold text-emerald-700"
+                  >SIAP PAKAI</span
+                >
+              </div>
+              <h3 class="mt-5 text-xl font-bold">Pantau Pegawai</h3>
+              <p class="mt-2 flex-1 text-sm leading-7 text-ink/65">
+                Rekap kehadiran dan aktivitas pegawai dalam satu tampilan. Membantu pimpinan melihat
+                distribusi beban kerja dan kehadiran unit kerja tanpa menunggu rekap manual akhir
+                bulan.
+              </p>
+              <span class="mt-5 text-sm font-bold text-amber-700 transition group-hover:translate-x-1"
+                >Buka pawai.toolkitbps.my.id →</span
+              >
+            </a>
+          </div>
+        </section>
+
+        <!-- PRINSIP / NON-PROFIT -->
+        <section id="prinsip" class="reveal mt-24 scroll-mt-24">
+          <div class="rounded-3xl border border-ink/8 bg-white/75 p-8 backdrop-blur sm:p-12">
+            <div class="mx-auto max-w-3xl text-center">
+              <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Kenapa gratis?</h2>
+              <p class="mt-4 text-base leading-7 text-ink/70">
+                Toolkit BPS dibuat oleh pegawai BPS yang menjumpai sendiri pekerjaan berulang yang
+                bisa dipersingkat dengan aplikasi sederhana. Aplikasi ini dibagikan sebagai bentuk
+                bantuan antar-satuan kerja — bukan produk komersial.
+              </p>
+            </div>
+
+            <div class="mt-10 grid gap-5 md:grid-cols-3">
+              <div class="rounded-2xl border border-ink/8 bg-white p-6">
+                <div class="text-lg font-bold">Tanpa biaya, tanpa langganan</div>
+                <p class="mt-2 text-sm leading-7 text-ink/65">
+                  Tidak ada biaya pembelian, biaya bulanan, maupun biaya per pengguna. Tidak ada
+                  fitur yang dikunci di balik pembayaran.
+                </p>
+              </div>
+              <div class="rounded-2xl border border-ink/8 bg-white p-6">
+                <div class="text-lg font-bold">Bukan untuk mencari untung</div>
+                <p class="mt-2 text-sm leading-7 text-ink/65">
+                  Tujuannya membantu pekerjaan statistik di daerah berjalan lebih rapi dan lebih
+                  cepat. Tidak ada iklan dan tidak ada penjualan data.
+                </p>
+              </div>
+              <div class="rounded-2xl border border-ink/8 bg-white p-6">
+                <div class="text-lg font-bold">Data tetap milik instansi</div>
+                <p class="mt-2 text-sm leading-7 text-ink/65">
+                  Setiap satuan kerja memakai ruang datanya sendiri. Bila diperlukan, aplikasi dapat
+                  dipasang di lingkungan server instansi agar data sepenuhnya di kendali instansi.
+                </p>
+              </div>
+            </div>
+
+            <p class="mx-auto mt-10 max-w-3xl text-center text-sm leading-7 text-ink/60">
+              Karena dikelola mandiri tanpa tim komersial, pengembangan mengikuti kebutuhan nyata di
+              lapangan. Masukan dari satuan kerja lain sangat membantu menentukan prioritas
+              perbaikan berikutnya.
+            </p>
+          </div>
+        </section>
+
+        <!-- MONITORING SE -->
+        <section id="monitoring" class="reveal mt-24 scroll-mt-24">
+          <div class="mx-auto max-w-3xl text-center">
+            <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Monitoring SE2026 — sudah berjalan di 6 satuan kerja
+            </h2>
+            <p class="mt-4 text-base leading-7 text-ink/65">
+              Dashboard pencacahan Sensus Ekonomi 2026 sudah dipakai bersama. Data setiap satuan
+              kerja terpisah, dan yang sudah ada dapat dibuka melalui tautan berikut.
+            </p>
+          </div>
+
+          <div class="mt-12 overflow-hidden rounded-3xl border border-ink/8 bg-white/80 backdrop-blur">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-sm">
+                <thead class="bg-ink/5 text-xs uppercase tracking-wide text-ink/60">
+                  <tr>
+                    <th class="px-5 py-3.5 font-bold">Satuan kerja</th>
+                    <th class="px-5 py-3.5 font-bold">Cakupan</th>
+                    <th class="px-5 py-3.5 text-right font-bold">Tautan</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-ink/8">
+                  <tr>
+                    <td class="px-5 py-4 font-semibold">BPS Kabupaten Minahasa Selatan</td>
+                    <td class="px-5 py-4 text-ink/65">Kabupaten</td>
+                    <td class="px-5 py-4 text-right">
+                      <a
+                        href="https://monitoring-se.toolkitbps.my.id"
+                        target="_blank"
+                        rel="noopener"
+                        class="font-bold text-violet-700 hover:underline"
+                        >Buka →</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-5 py-4 font-semibold">BPS Provinsi Sulawesi Utara</td>
+                    <td class="px-5 py-4 text-ink/65">Provinsi</td>
+                    <td class="px-5 py-4 text-right">
+                      <a
+                        href="https://mse-sulut.toolkitbps.my.id"
+                        target="_blank"
+                        rel="noopener"
+                        class="font-bold text-violet-700 hover:underline"
+                        >Buka →</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-5 py-4 font-semibold">BPS Kabupaten Minahasa</td>
+                    <td class="px-5 py-4 text-ink/65">Kabupaten</td>
+                    <td class="px-5 py-4 text-right">
+                      <a
+                        href="https://mse-minahasa.toolkitbps.my.id"
+                        target="_blank"
+                        rel="noopener"
+                        class="font-bold text-violet-700 hover:underline"
+                        >Buka →</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-5 py-4 font-semibold">BPS Kabupaten Minahasa Utara</td>
+                    <td class="px-5 py-4 text-ink/65">Kabupaten</td>
+                    <td class="px-5 py-4 text-right">
+                      <a
+                        href="https://mse-minut.toolkitbps.my.id"
+                        target="_blank"
+                        rel="noopener"
+                        class="font-bold text-violet-700 hover:underline"
+                        >Buka →</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-5 py-4 font-semibold">BPS Kota Tomohon</td>
+                    <td class="px-5 py-4 text-ink/65">Kota</td>
+                    <td class="px-5 py-4 text-right">
+                      <a
+                        href="https://mse-tomohon.toolkitbps.my.id"
+                        target="_blank"
+                        rel="noopener"
+                        class="font-bold text-violet-700 hover:underline"
+                        >Buka →</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-5 py-4 font-semibold">BPS Kota Manado</td>
+                    <td class="px-5 py-4 text-ink/65">Kota</td>
+                    <td class="px-5 py-4 text-right">
+                      <a
+                        href="https://mse-manado.toolkitbps.my.id"
+                        target="_blank"
+                        rel="noopener"
+                        class="font-bold text-violet-700 hover:underline"
+                        >Buka →</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="border-t border-ink/8 bg-ink/3 px-5 py-4 text-xs text-ink/55">
+              Satuan kerja lain dapat ikut memakai dashboard ini. Hubungi kami untuk penyiapan ruang
+              data satuan kerja Anda.
+            </div>
+          </div>
+        </section>
+
+        <!-- CARA MULAI -->
+        <section class="reveal mt-24">
+          <div class="mx-auto max-w-3xl text-center">
+            <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Cara mulai memakainya</h2>
+            <p class="mt-4 text-base leading-7 text-ink/65">
+              Tidak perlu proses pengadaan dan tidak perlu instalasi di komputer pengguna.
+            </p>
+          </div>
+
+          <div class="mt-12 grid gap-6 md:grid-cols-3">
+            <div class="rounded-2xl border border-ink/8 bg-white/70 p-7 backdrop-blur">
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-sm font-extrabold text-mint"
+              >
+                1
+              </div>
+              <h3 class="mt-5 text-lg font-bold">Hubungi kami</h3>
+              <p class="mt-2 text-sm leading-7 text-ink/65">
+                Kirim keterangan satuan kerja, kebutuhan aplikasi, dan perkiraan jumlah pengguna.
+                Kami balas dengan langkah selanjutnya.
+              </p>
+            </div>
+            <div class="rounded-2xl border border-ink/8 bg-white/70 p-7 backdrop-blur">
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-sm font-extrabold text-mint"
+              >
+                2
+              </div>
+              <h3 class="mt-5 text-lg font-bold">Kami siapkan ruang data</h3>
+              <p class="mt-2 text-sm leading-7 text-ink/65">
+                Akun dan ruang data satuan kerja Anda disiapkan tanpa biaya, terpisah dari satuan
+                kerja lain.
+              </p>
+            </div>
+            <div class="rounded-2xl border border-ink/8 bg-white/70 p-7 backdrop-blur">
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-sm font-extrabold text-mint"
+              >
+                3
+              </div>
+              <h3 class="mt-5 text-lg font-bold">Mulai bekerja</h3>
+              <p class="mt-2 text-sm leading-7 text-ink/65">
+                Buka aplikasi dari peramban — komputer maupun telepon — lalu pakai untuk pekerjaan
+                sehari-hari.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="reveal mt-24 scroll-mt-24">
+          <div class="mx-auto max-w-3xl">
+            <h2 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Pertanyaan yang sering muncul
+            </h2>
+
+            <div class="mt-10 space-y-3">
+              <details class="rounded-2xl border border-ink/8 bg-white/80 p-5 backdrop-blur">
+                <summary class="flex items-center justify-between gap-4">
+                  <span class="font-bold">Apakah benar-benar gratis?</span>
+                  <span class="faq-icon text-xl font-bold text-ink/40">+</span>
+                </summary>
+                <p class="mt-3 text-sm leading-7 text-ink/65">
+                  Ya. Tidak ada biaya pembelian, langganan, maupun biaya per pengguna. Aplikasi ini
+                  dibagikan sebagai bentuk bantuan antar-satuan kerja BPS, bukan produk komersial.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-ink/8 bg-white/80 p-5 backdrop-blur">
+                <summary class="flex items-center justify-between gap-4">
+                  <span class="font-bold">Apakah data instansi kami aman?</span>
+                  <span class="faq-icon text-xl font-bold text-ink/40">+</span>
+                </summary>
+                <p class="mt-3 text-sm leading-7 text-ink/65">
+                  Setiap satuan kerja memakai ruang datanya sendiri dan hanya dipakai untuk keperluan
+                  aplikasi yang bersangkutan — tidak diperjualbelikan. Untuk kebutuhan tertentu,
+                  aplikasi dapat dipasang di lingkungan server instansi sendiri agar seluruh data
+                  tetap berada di kendali instansi.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-ink/8 bg-white/80 p-5 backdrop-blur">
+                <summary class="flex items-center justify-between gap-4">
+                  <span class="font-bold">Apakah harus mengajukan lewat pengadaan?</span>
+                  <span class="faq-icon text-xl font-bold text-ink/40">+</span>
+                </summary>
+                <p class="mt-3 text-sm leading-7 text-ink/65">
+                  Tidak, karena tidak ada transaksi jual beli. Penggunaan cukup dengan menghubungi
+                  kami untuk penyiapan akun satuan kerja.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-ink/8 bg-white/80 p-5 backdrop-blur">
+                <summary class="flex items-center justify-between gap-4">
+                  <span class="font-bold">Bisa dipakai di luar Sulawesi Utara?</span>
+                  <span class="faq-icon text-xl font-bold text-ink/40">+</span>
+                </summary>
+                <p class="mt-3 text-sm leading-7 text-ink/65">
+                  Bisa. Aplikasi dirancang untuk pekerjaan statistik daerah secara umum, sehingga
+                  satuan kerja BPS di provinsi lain dapat memakainya. Silakan hubungi kami untuk
+                  penyesuaian bila diperlukan.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-ink/8 bg-white/80 p-5 backdrop-blur">
+                <summary class="flex items-center justify-between gap-4">
+                  <span class="font-bold">Bagaimana cara memperbarui data Monitoring SE?</span>
+                  <span class="faq-icon text-xl font-bold text-ink/40">+</span>
+                </summary>
+                <p class="mt-3 text-sm leading-7 text-ink/65">
+                  Melalui fitur unggah berkas Excel/CSV di dalam dashboard. Setelah berkas diproses,
+                  dashboard otomatis memperbarui progres dan rekapitulasi.
+                </p>
+              </details>
+
+              <details class="rounded-2xl border border-ink/8 bg-white/80 p-5 backdrop-blur">
+                <summary class="flex items-center justify-between gap-4">
+                  <span class="font-bold">Bagaimana kalau ada kendala atau usulan fitur?</span>
+                  <span class="faq-icon text-xl font-bold text-ink/40">+</span>
+                </summary>
+                <p class="mt-3 text-sm leading-7 text-ink/65">
+                  Sampaikan melalui kontak di bawah. Karena dikelola mandiri, usulan yang paling
+                  sering dibutuhkan akan diprioritaskan lebih dulu.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <!-- KONTAK -->
+        <section id="kontak" class="reveal mt-24 scroll-mt-24">
+          <div
+            class="rounded-3xl border border-ink/10 bg-gradient-to-br from-ink to-ink/90 p-8 text-center text-white sm:p-14"
+          >
+            <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Ingin memakai untuk satuan kerja Anda?
+            </h2>
+            <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/70 sm:text-base">
+              Kirim keterangan singkat: nama satuan kerja, kebutuhan aplikasi, dan perkiraan jumlah
+              pengguna. Kami balas dengan langkah selanjutnya.
+            </p>
+
+            <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a
+                href="mailto:admin@toolkitbps.my.id?subject=Permohonan%20Akun%20Toolkit%20BPS"
+                class="w-full rounded-full bg-mint px-7 py-3.5 text-center text-sm font-bold text-ink transition hover:bg-mint/85 sm:w-auto"
+                >admin@toolkitbps.my.id</a
+              >
+              <a
+                href="https://wa.me/6282360054904"
+                target="_blank"
+                rel="noopener"
+                class="w-full rounded-full border border-white/25 px-7 py-3.5 text-center text-sm font-bold text-white transition hover:bg-white/10 sm:w-auto"
+                >Hubungi via WhatsApp</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="mt-20 border-t border-ink/8 pt-8 pb-4">
+          <div
+            class="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left"
+          >
+            <div>
+              <div class="text-sm font-bold text-ink">Toolkit BPS</div>
+              <p class="mt-1 text-xs text-ink/55">
+                Perangkat kerja digital gratis untuk satuan kerja Badan Pusat Statistik.
+              </p>
+            </div>
+            <p class="text-xs text-ink/55">&copy; 2026 Toolkit BPS · Non-profit</p>
+          </div>
         </footer>
       </main>
     </div>
+
+    <script>
+      (function () {
+        var els = document.querySelectorAll(".reveal");
+        if (!("IntersectionObserver" in window)) {
+          els.forEach(function (el) {
+            el.classList.add("is-visible");
+          });
+          return;
+        }
+        var obs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        els.forEach(function (el) {
+          obs.observe(el);
+        });
+      })();
+    </script>
   </body>
 </html>
